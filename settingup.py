@@ -6,8 +6,9 @@ from os import listdir
 from os.path import isfile, join
 matplotlib.use('TkAgg')
 from model import model
-task = "train"
-# task = "visualize"
+import trainer
+# task = "train"
+task = "visualize"
 
 path = "ARC-master/data/training/"
 
@@ -26,21 +27,27 @@ for filename in filenames:
             cnt = 1
             # print(np.array(data['train'][0]['input']).shape)
             # print(np.array(data['train'][0]['output']).shape)
-
+            if np.array(data['train'][0]['input']).shape != np.array(data['train'][0]['output']).shape:
+                continue
             for i in range(len(data['train'])):
                 elem = data['train'][i]
                 inp = np.array(elem['input'])
                 out = np.array(elem['output'])
 
+                # print("Example ",i+1,", Loss: ",trainer.evaluate(inp,inp,out))
+                # print("Example ",i+1,", Loss: ",trainer.evaluate(inp,out,out))
+                # pred = np.array(inp)
+                # pred[1:3,2:4] = out[1:3,2:4]
+                # print("Example ", i + 1, ", Loss: ", trainer.evaluate(inp, pred, out))
 
                 plt.subplot(l,2,cnt)
-                if i == 0:
-                    plt.title(inp.shape)
+                # if i == 0:
+                #     plt.title(inp.shape)
                 cnt += 1
                 plt.imshow(inp)
                 plt.subplot(l, 2, cnt)
-                if i == 0:
-                    plt.title(out.shape)
+                # if i == 0:
+                #     plt.title(out.shape)
                 cnt += 1
                 plt.imshow(out)
 
