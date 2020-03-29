@@ -4,6 +4,10 @@ def train(inputs, outputs):
     #TODO
     pass
 
+def predict(input):
+    #TODO
+    pass
+
 def evaluate(input, prediction, ground_truth):
     if prediction.shape != ground_truth.shape:
         print("Improper shape")
@@ -20,5 +24,7 @@ def evaluate(input, prediction, ground_truth):
         loss = np.sum(diff)/np.sum(diff2)
         # loss = np.sum(diff)/(diff.shape[0]*diff.shape[1])
         return loss
+
+
 
 
